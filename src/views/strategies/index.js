@@ -1,8 +1,10 @@
 // ** React Imports
 import React from 'react'
 
+import DetailsPage from './details'
+
 const Strategies = () => {
-  return <></>
+  return <DetailsPage />
 }
 
 export default Strategies
