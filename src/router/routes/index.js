@@ -10,6 +10,7 @@ import ChartsRoutes from './Charts'
 import DashboardRoutes from './Dashboards'
 import UiElementRoutes from './UiElements'
 import ExtensionsRoutes from './Extensions'
+import StrategiesRoutes from './Strategies'
 import PageLayoutsRoutes from './PageLayouts'
 import AuthenticationRoutes from './Authentication'
 
@@ -46,6 +47,7 @@ const Routes = [
   ...PagesRoutes,
   ...UiElementRoutes,
   ...ExtensionsRoutes,
+  ...StrategiesRoutes,
   ...PageLayoutsRoutes,
   ...FormRoutes,
   ...TablesRoutes,
