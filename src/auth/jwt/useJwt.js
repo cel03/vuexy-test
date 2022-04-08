@@ -1,6 +1,7 @@
 // ** Core JWT Import
-import useJwt from '@src/@core/auth/jwt/useJwt'
+import JwtService from './jwtService'
+import jwtConfig from './config'
 
-const { jwt } = useJwt({})
+const jwt = new JwtService(jwtConfig)
 
 export default jwt

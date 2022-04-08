@@ -1,5 +1,4 @@
 // ** React Imports
-import { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 // ** Custom Hooks
@@ -49,8 +48,8 @@ const ToastContent = ({ t, name, role }) => {
 }
 
 const defaultValues = {
-  password: 'admin',
-  loginEmail: 'admin@demo.com'
+  password: '123456',
+  loginEmail: 'teste1@teste.com'
 }
 
 const Login = () => {
@@ -58,7 +57,6 @@ const Login = () => {
   const { skin } = useSkin()
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const ability = useContext(AbilityContext)
   const {
     control,
     setError,
@@ -71,14 +69,20 @@ const Login = () => {
   const onSubmit = data => {
     if (Object.values(data).every(field => field.length > 0)) {
       useJwt
-        .login({ email: data.loginEmail, password: data.password })
+        .login({ email: data.loginEmail, senha: data.password })
         .then(res => {
-          const data = { ...res.data.userData, accessToken: res.data.accessToken, refreshToken: res.data.refreshToken }
+          const data = {
+            role: 'admin',
+            accessToken: res.headers.bs_token,
+            refreshToken: undefined,
+            name: res.data.body.nome,
+            username: res.data.body.nome,
+            fullname: res.data.body.nome
+          }
           dispatch(handleLogin(data))
-          ability.update(res.data.userData.ability)
           navigate(getHomeRouteForLoggedInUser(data.role))
           toast(t => (
-            <ToastContent t={t} role={data.role || 'admin'} name={data.fullName || data.username || 'John Doe'} />
+            <ToastContent t={t} role={data.role || 'admin'} name={data.name} />
           ))
         })
         .catch(err => console.log(err))
@@ -161,13 +165,8 @@ const Login = () => {
             <Alert color='primary'>
               <div className='alert-body font-small-2'>
                 <p>
-                  <small className='me-50'>
-                    <span className='fw-bold'>Admin:</span> admin@demo.com | admin
-                  </small>
-                </p>
-                <p>
-                  <small className='me-50'>
-                    <span className='fw-bold'>Client:</span> client@demo.com | client
+                  <small className="me-50">
+                    <span className="fw-bold">Admin:</span> teste1@teste.com
                   </small>
                 </p>
               </div>
